@@ -8,7 +8,7 @@ from tracker.views import (
     TaskRetrieveAPIView,
     TaskUpdateAPIView,
     TaskDeleteAPIView,
-    TaskCreateAPIView, EmployeeTrackAPIView,
+    TaskCreateAPIView, EmployeeTrackAPIView, ImportantTasksAPIView,
 
 )
 
@@ -24,5 +24,5 @@ urlpatterns = [
                   path("task/update/<int:pk>/", TaskUpdateAPIView.as_view(), name="task_update"),
                   path("task/delete/<int:pk>/", TaskDeleteAPIView.as_view(), name="task_delete"),
                   path('employee_track/employee_track_list/', EmployeeTrackAPIView.as_view(), name="employee_track_list"),
-
+                  path('important_tasks/important_tasks_list/', ImportantTasksAPIView.as_view(), name='important_tasks_list'),
               ] + router.urls
