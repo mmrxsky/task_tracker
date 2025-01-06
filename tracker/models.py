@@ -32,6 +32,18 @@ class Employee(models.Model):
 class Task(models.Model):
     """Модель задачи"""
 
+    TODO_STATUS = "ToDo"
+    PROGRESS_STATUS = "In Progress"
+    DONE_STATUS = "Done"
+    CLOSED_STATUS = "Closed"
+
+    STATUS_CHOICES = (
+        (TODO_STATUS, "К исполнению"),
+        (PROGRESS_STATUS, "В процессе"),
+        (DONE_STATUS, "Выполнена"),
+        (CLOSED_STATUS, "Отменена"),
+    )
+
     title = models.CharField(max_length=250, verbose_name="Название задачи")
     description = models.TextField(**NULLABLE, verbose_name="Описание задачи")
     executor = models.ForeignKey(
