@@ -15,3 +15,19 @@ class Employee(models.Model):
     class Meta:
         verbose_name = 'Сотрудник'
         verbose_name_plural = 'Сотрудники'
+
+class Task(models.Model):
+    """Модель задачи"""
+
+    title = models.CharField(max_length=250, verbose_name='Название задачи')
+    description = models.TextField(**NULLABLE, verbose_name='Описание задачи')
+    executor = models.ForeignKey(Employee, on_delete=models.CASCADE, **NULLABLE, related_name='tasks', verbose_name='исполнитель задачи')
+    status = models.CharField(max_length=50, **NULLABLE, verbose_name='Статус')
+    time_complete = models.DateTimeField(**NULLABLE, verbose_name='Дата и время выполнения')
+
+    def __str__(self):
+        return f'{self.title}  {self.executor}'
+
+    class Meta:
+        verbose_name = 'Задача'
+        verbose_name_plural = 'Задачи'
