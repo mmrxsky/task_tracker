@@ -23,11 +23,12 @@ class Employee(models.Model):
     )
 
     def __str__(self):
-        return f'{self.full_name} - {self.position}'
+        return f"{self.full_name} - {self.position}"
 
     class Meta:
-        verbose_name = 'Сотрудник'
-        verbose_name_plural = 'Сотрудники'
+        verbose_name = "Сотрудник"
+        verbose_name_plural = "Сотрудники"
+
 
 class Task(models.Model):
     """Модель задачи"""
@@ -78,5 +79,5 @@ class Task(models.Model):
         )
 
     class Meta:
-        verbose_name = 'Задача'
-        verbose_name_plural = 'Задачи'
+        verbose_name = "Задача"
+        verbose_name_plural = "Задачи"

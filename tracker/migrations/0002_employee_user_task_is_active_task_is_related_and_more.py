@@ -8,34 +8,58 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('tracker', '0001_initial'),
+        ("tracker", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='employee',
-            name='user',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Сотрудник'),
+            model_name="employee",
+            name="user",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Сотрудник",
+            ),
         ),
         migrations.AddField(
-            model_name='task',
-            name='is_active',
-            field=models.BooleanField(default=False, verbose_name='Признак активной задачи'),
+            model_name="task",
+            name="is_active",
+            field=models.BooleanField(
+                default=False, verbose_name="Признак активной задачи"
+            ),
         ),
         migrations.AddField(
-            model_name='task',
-            name='is_related',
-            field=models.BooleanField(default=False, verbose_name='Признак связанной задачи'),
+            model_name="task",
+            name="is_related",
+            field=models.BooleanField(
+                default=False, verbose_name="Признак связанной задачи"
+            ),
         ),
         migrations.AddField(
-            model_name='task',
-            name='parent_task',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='parent', to='tracker.task', verbose_name='Родительская задача'),
+            model_name="task",
+            name="parent_task",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="parent",
+                to="tracker.task",
+                verbose_name="Родительская задача",
+            ),
         ),
         migrations.AlterField(
-            model_name='task',
-            name='executor',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='tasks', to='tracker.employee', verbose_name='Исполнитель задачи'),
+            model_name="task",
+            name="executor",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="tasks",
+                to="tracker.employee",
+                verbose_name="Исполнитель задачи",
+            ),
         ),
     ]

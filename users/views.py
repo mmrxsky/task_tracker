@@ -3,6 +3,7 @@ from rest_framework.permissions import AllowAny
 from users.models import User
 from users.serializers import UserSerializer
 
+
 class UserCreateAPIView(generics.CreateAPIView):
     """Класс для создания пользователя"""
 

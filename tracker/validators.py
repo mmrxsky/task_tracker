@@ -13,7 +13,7 @@ class RelatedTaskValid:
         if (parent_task is not None and not is_related) or (
             parent_task is None and is_related
         ):
-            raise ValidationError(f"Задача должна быть связана с родительской")
+            raise ValidationError("Задача должна быть связана с родительской")
 
 
 class StatusTaskValid:

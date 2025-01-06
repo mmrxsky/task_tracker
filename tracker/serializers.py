@@ -9,7 +9,10 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Employee
-        fields = ('full_name', 'position',)
+        fields = (
+            "full_name",
+            "position",
+        )
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -17,31 +20,32 @@ class TaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
-        fields = '__all__'
+        fields = "__all__"
         validators = [
-            RelatedTaskValid(field='parent_task'),
-            NestingOfTaskValid(field='parent_task'),
-            StatusTaskValid(field='status'),
+            RelatedTaskValid(field="parent_task"),
+            NestingOfTaskValid(field="parent_task"),
+            StatusTaskValid(field="status"),
         ]
 
+
 class EmployeeTrackSerializer(serializers.ModelSerializer):
-        """Сериализатор сотрудника с отслеживанием выполненных задач"""
+    """Сериализатор сотрудника с отслеживанием выполненных задач"""
 
-        active_task_count = serializers.SerializerMethodField()
-        tasks = TaskSerializer(many=True)
+    active_task_count = serializers.SerializerMethodField()
+    tasks = TaskSerializer(many=True)
 
-        @staticmethod
-        def get_active_task_count(obj):
-            return obj.tasks.filter(is_active=True).count()
+    @staticmethod
+    def get_active_task_count(obj):
+        return obj.tasks.filter(is_active=True).count()
 
-        class Meta:
-            model = Employee
-            fields = ('full_name', 'position', 'active_task_count', 'tasks')
-            validators = [
-                RelatedTaskValid(field="parent_task"),
-                NestingOfTaskValid(field="parent_task"),
-                StatusTaskValid(field="status"),
-            ]
+    class Meta:
+        model = Employee
+        fields = ("full_name", "position", "active_task_count", "tasks")
+        validators = [
+            RelatedTaskValid(field="parent_task"),
+            NestingOfTaskValid(field="parent_task"),
+            StatusTaskValid(field="status"),
+        ]
 
 
 class ImportantTaskSerializer(serializers.ModelSerializer):

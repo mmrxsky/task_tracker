@@ -32,12 +32,12 @@ class EmployeeViewSet(viewsets.ModelViewSet):
         new_employee.save()
 
     def get_permissions(self):
-        if self.action in ['create', 'destroy']:
+        if self.action in ["create", "destroy"]:
             self.permission_classes = (
                 IsAuthenticated,
                 IsStaff,
             )
-        elif self.action in ['update', 'retrieve']:
+        elif self.action in ["update", "retrieve"]:
             self.permission_classes = (IsAuthenticated,)
         return super().get_permissions()
 
@@ -89,7 +89,7 @@ class EmployeeTrackAPIView(ListAPIView):
     serializer_class = EmployeeTrackSerializer
     queryset = Employee.objects.all()
     filter_backends = [OrderingFilter]
-    ordering_fields = ['active_task_count']
+    ordering_fields = ["active_task_count"]
 
 
 class ImportantTasksAPIView(ListAPIView):

@@ -1,5 +1,6 @@
 from tracker.models import Employee, Task
 
+
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
     list_display = ("id", "full_name", "position")
