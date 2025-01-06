@@ -1,9 +1,10 @@
 from rest_framework import viewsets
+from rest_framework.filters import OrderingFilter
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 
 from tracker.models import Employee, Task
-from tracker.serializers import EmployeeSerializer, TaskSerializer
+from tracker.serializers import EmployeeSerializer, TaskSerializer, EmployeeTrackSerializer
 from users.permissions import IsStaff
 
 
@@ -67,3 +68,12 @@ class TaskDeleteAPIView(DestroyAPIView):
 
     queryset = Task.objects.all()
     permission_classes = (IsAuthenticated, IsStaff)
+
+
+class EmployeeTrackAPIView(ListAPIView):
+    """Класс для вывода списка активных задач сотрудника"""
+
+    serializer_class = EmployeeTrackSerializer
+    queryset = Employee.objects.all()
+    filter_backends = [OrderingFilter]
+    ordering_fields = ['active_task_count']
