@@ -27,7 +27,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
 
     def perform_create(self, serializer):
-        new_employee = serializer.save
+        new_employee = serializer.save()
         new_employee.user = self.request.user
         new_employee.save()
 
